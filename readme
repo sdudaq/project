@@ -1,0 +1,13 @@
+使用说明:
+
+
+构建项目：
+
+mkdir build && cd build
+
+cmake -G "MinGW Makefiles" ..
+
+make
+
+运行测试：
+./sm4_test

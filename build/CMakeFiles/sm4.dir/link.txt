@@ -1,0 +1,2 @@
+D:\exe\MInGW\mingw64\bin\ar.exe qc libsm4.a CMakeFiles/sm4.dir/src/SM4.cpp.obj
+D:\exe\MInGW\mingw64\bin\ranlib.exe libsm4.a
