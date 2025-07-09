@@ -5,7 +5,7 @@
 ---
 
 ## 项目结构
-
+```
 project1/
 ├── CMakeLists.txt # CMake 构建配置
 ├── include/ # 头文件目录
@@ -18,7 +18,7 @@ project1/
 ├── .vscode/ # VSCode 配置（可选）
 ├── README.md # 项目说明文件
 └── readme.md # 补充说明
-
+```
 
 ---
 
