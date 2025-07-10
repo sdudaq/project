@@ -1,4 +1,4 @@
-# SM4 加密算法实现（C++ 版本）
+# SM4 加密算法实现
 
 本项目是对 [GB/T 32907-2016 国家密码算法 SM4](https://en.wikipedia.org/wiki/SM4_(cipher)) 的标准实现，支持跨平台构建与独立测试。
 
