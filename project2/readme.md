@@ -44,7 +44,7 @@ Extracted (contrast): ù 8ìNH
 ```
 
 ## LSB
-<img src="project2\data\original.jpg" alt="原图片" width="500">
+<img src=".\data\original.jpg" alt="原图片" width="500">
 ## 总结
 - 经过演示我们可以发现LCB很脆弱如果压缩图片为jpg会提取不到水印，但是如果改进为DCT会发现即使是压缩也会提取到完整的水印说明DCT的鲁棒性更强
 
