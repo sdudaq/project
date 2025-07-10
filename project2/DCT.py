@@ -52,7 +52,7 @@ def embed_dct_watermark_robust(image_path, watermark_text, output_path, block_si
             block_ptr += 1
 
     cv2.imwrite(output_path, np.uint8(watermarked_img))
-    print(f"✅ Robust DCT Watermark embedded into {output_path}")
+    print(f" Robust DCT Watermark embedded into {output_path}")
 
 
 def extract_dct_watermark_robust(image_path, watermark_length, block_size=8, redundancy=3, threshold=1.0):

@@ -44,7 +44,47 @@ Extracted (contrast): ù 8ìNH
 ```
 
 ## LSB
+### 原图片
 <img src=".\data\original.jpg" alt="原图片" width="500">
+
+### 植入水印图片
+<img src=".\data\watermarked.jpg" alt="LSB水印图片" width="500">
+
+### 代码输出
+```
+PS D:\chuagnxinshijian\SM4\project2>  & D:/exe/anaconda/envs/class01/python.exe d:/chuagnxinshijian/SM4/project2/LSB.py
+Watermark embedded and saved to data/watermarked.png
+Extracted (watermarked): Hidden123
+-------------------------some attacks---------------------------
+Extracted (flip): ;¤lí¶q"R
+Extracted (translate): $!
+Extracted (crop): IIN
+Extracted (contrast): ù 8ìNH
+m
+```
+
+## DCT
+### 原图片
+<img src=".\data\original.jpg" alt="原图片" width="500">
+
+### 植入水印图片
+<img src="./data/watermarked_dct.png" alt="DCT水印图片" width="500">
+
+### 压缩后图片
+<img src="./data/watermarked_dct.jpg" alt="DCT压缩水印图片" width="500">
+
+### 代码输出
+```
+PS D:\chuagnxinshijian\SM4\project2>  & D:/exe/anaconda/envs/class01/python.exe d:/chuagnxinshijian/SM4/project2/DCT.py
+ Robust DCT Watermark embedded into data/watermarked_dct.jpg
+Extracted watermark: Hidden12
+-------------------------some attacks---------------------------
+Extracted (flip): .KQ3°
+Extracted (translate): ©@-÷ÉIÐ
+Extracted (crop): müÚ§³=Äq
+Extracted (contrast): O{à:Ú=A
+PS D:\chuagnxinshijian\SM4\project2> 
+```
 ## 总结
 - 经过演示我们可以发现LCB很脆弱如果压缩图片为jpg会提取不到水印，但是如果改进为DCT会发现即使是压缩也会提取到完整的水印说明DCT的鲁棒性更强
 
