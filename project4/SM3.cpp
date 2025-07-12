@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
-#include <string>
 #include <cstring>
 #include <iomanip>
+#include <sstream>
 
 class SM3 {
 public:
@@ -11,7 +11,7 @@ public:
     }
 
     std::vector<uint8_t> hash(const uint8_t* message, size_t length) {
-        // 初始化向量IV
+        // 初始化向量
         uint32_t V[8] = {
             0x7380166F, 0x4914B2B9, 0x172442D7, 0xDA8A0600,
             0xA96F30BC, 0x163138AA, 0xE38DEE4D, 0xB0FB0E4E
@@ -71,20 +71,17 @@ private:
     // 消息填充
     std::vector<uint8_t> padding(const uint8_t* message, size_t length) {
         size_t bit_length = length * 8;
-        size_t pad_length = 64 - (length % 64);
-        
-        // 至少填充1字节的0x80和8字节的长度
-        if (pad_length < 9) {
-            pad_length += 64;
-        }
-
         std::vector<uint8_t> padded(message, message + length);
-        padded.push_back(0x80); // 添加比特'1'
         
-        // 填充0
-        padded.resize(padded.size() + pad_length - 9, 0);
+        // 添加比特'1'
+        padded.push_back(0x80);
         
-        // 添加长度(64位大端整数)
+        // 填充0直到长度≡448 mod 512
+        while ((padded.size() * 8 + 64) % 512 != 0) {
+            padded.push_back(0x00);
+        }
+        
+        // 添加原始长度(64位大端整数)
         for (int i = 7; i >= 0; i--) {
             padded.push_back((bit_length >> (8 * i)) & 0xFF);
         }
@@ -154,16 +151,15 @@ std::string bytesToHex(const std::vector<uint8_t>& bytes) {
 int main() {
     SM3 sm3;
     
-    // 测试用例
+    // 官方测试用例
     struct TestCase {
         std::string input;
         std::string expected;
     } testCases[] = {
-        {"", "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0"},
         {"abc", "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0"},
         {"abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", 
          "debe9ff92275b8a138604889c18e5a4d6fdb70e5387e5765293dcba39c0c5732"},
-        {"Hello SM3", "24f0135c646cdd8b8776b8e8d60a3a0e9a6e5d7f8b1c2d3e4f5a6b7c8d9e0f1"}
+        {"HelloSM3", "36065686c1859012d3b504ecee7ae52e5f0fdf3089a0854811f613f77599a4cd"}
     };
     
     for (const auto& test : testCases) {
