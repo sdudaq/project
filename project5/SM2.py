@@ -1,7 +1,7 @@
 import random
 import hashlib
 import base64
-
+from gmssl import sm3, func
 class SM2:
     """
     纯Python实现的SM2椭圆曲线数字签名算法
@@ -27,7 +27,12 @@ class SM2:
             old_r, r = r, old_r - quotient * r
             old_s, s = s, old_s - quotient * s
         return old_s % p
-    
+    @staticmethod
+    def _hash_message(message: bytes) -> int:
+        """使用SM3计算消息哈希值，返回整数形式"""
+        digest = sm3.sm3_hash(func.bytes_to_list(message))  # 返回十六进制字符串
+        return int(digest, 16) % SM2.N
+
     @staticmethod
     def ec_add(p1, p2, p):
         """椭圆曲线点加法"""
@@ -77,7 +82,7 @@ class SM2:
             raise ValueError("Private key not initialized")
         
         # 计算消息哈希 (实际应使用SM3，此处用SHA-256替代)
-        e = int.from_bytes(hashlib.sha256(message).digest(), 'big') % SM2.N
+        e = self._hash_message(message)
         if e == 0:
             e = 1
             
@@ -115,7 +120,7 @@ class SM2:
             return False
             
         # 计算消息哈希 (实际应使用SM3，此处用SHA-256替代)
-        e = int.from_bytes(hashlib.sha256(message).digest(), 'big') % SM2.N
+        e = self._hash_message(message)
         if e == 0:
             e = 1
             
@@ -155,3 +160,9 @@ if __name__ == "__main__":
     tampered_message = b"Hello SM2 Digital Signature!"
     is_valid_tampered = sm2.verify(tampered_message, signature)
     print("篡改消息验证结果:", "有效" if is_valid_tampered else "无效")
+        # 4. 性能测试
+    import time
+    start = time.time()
+    for _ in range(10):
+        sm2.sign(message)
+    print(f"10次签名平均耗时: {(time.time()-start)/10:.4f}s")
