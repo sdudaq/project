@@ -99,9 +99,9 @@ pip install gmssl
    `R ≠ r` → 签名无效
 
 ---
-# SM2 算法优化改进说明
+## SM2 算法优化改进说明
 
-## 优化措施对比表
+### 优化措施对比表
 
 | 优化点                | 描述                                                                                   |
 |----------------------|----------------------------------------------------------------------------------------|
@@ -114,7 +114,7 @@ pip install gmssl
 | 安全性检测           | 在 `sign()` 和 `verify()` 中完整检查 k, r, s, t 的取值有效性，防止边界条件漏洞             |
 | 签名性能测试          | 内置 100 次签名/验证的基准测试功能，输出平均耗时（含标准差），便于性能调优和硬件加速效果评估 |
 
-## 对齐说明
+### 对齐说明
 
 1. **技术实现对齐**：
    - 所有优化点均通过 `unittest` 单元测试验证
@@ -124,5 +124,28 @@ pip install gmssl
 2. **性能指标对齐**：
    ```python
    # 性能测试样例输出
-   SM2 签名平均耗时: 2.34ms ± 0.12ms (100次)
-   SM2 验证平均耗时: 3.17ms ± 0.15ms (100次)
+   SM2 签名平均耗时: 0.1416s (100次)
+   ```
+   改进版本：
+   SM2 签名平均耗时: 0.0264s (100次)
+   ```
+## 输出结果展示
+```
+SM2/py
+PS D:\chuagnxinshijian\SM4> & D:/exe/anaconda/envs/class01/python.exe d:/chuagnxinshijian/SM4/project5/SM2.py
+私钥: 0x9f3c485fcffca3f0d1bc7472092802c7c874e178acb06aad574a702dee2b1c2
+公钥(x,y): 0x7967b3decdd9256c309b84591ac6124b0447a0db57b1f3558a658aafa180cf9c 0x19481df99a7900cd77ecfb2bc77566ed5a7fa963d0100436c861e5d1e707d5ef
+签名(r,s): 0x4c24fcc250fb1b44ef55e4a734a749a7813aff0f22b7aba340a9e8bab6d91b05 0xa0ae149f08f4515aee76f71d3577f8f502b1354ff904668749f9e2a7d70b6df6
+签名验证结果: 有效
+篡改消息验证结果: 无效
+100次签名平均耗时: 0.1416s
+
+SM2_op.py:
+PS D:\chuagnxinshijian\SM4> & D:/exe/anaconda/envs/class01/python.exe d:/chuagnxinshijian/SM4/project5/SM2_op.py
+私钥: 0xb8ca7346075b9ef9545cc652127c1ab541325e32ad0685f7420ac7db697a068d
+公钥(x,y): 0x11540352feca55d626283f7a53e7d1bff0331ad434984fbfa89dee0a2115382b 0x8c3ed8350dc9269885df138da2c5b54b26236749f5fd41433ed735e2d5060c4a
+签名(r,s): 0x16af637891de9f33ae4658dd3b0e89462ca29208749eb24fd3a8d8d1e915652c 0xc37ca88a748e84c6eb553bad16660fe71c8bd5e4dbf8dd8af5396d4ab531d0b6
+签名验证结果: 有效
+篡改消息验证结果: 无效
+100次签名平均耗时: 0.0264s
+```
