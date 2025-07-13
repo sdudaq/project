@@ -163,6 +163,6 @@ if __name__ == "__main__":
         # 4. 性能测试
     import time
     start = time.time()
-    for _ in range(10):
+    for _ in range(100):
         sm2.sign(message)
-    print(f"10次签名平均耗时: {(time.time()-start)/10:.4f}s")
+    print(f"100次签名平均耗时: {(time.time()-start)/10:.4f}s")
