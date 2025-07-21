@@ -12,6 +12,7 @@ project1/
 │ └── SM4.h # 算法接口定义
 ├── src/ # 算法实现代码
 │ └── SM4.cpp # SM4 核心逻辑
+│ └── SM4_op.cpp # 对SM4.cpp的优化
 ├── tests/ # 测试代码
 │ └── test.cpp # 功能测试
 ├── build/ # 构建目录（自动生成）
