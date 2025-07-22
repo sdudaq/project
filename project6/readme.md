@@ -4,8 +4,7 @@
 1. [协议数学原理](#1-协议数学原理)  
 2. [完整版 vs 简化版对比](#2-完整版-vs-简化版对比)  
 3. [实现思路解析](#3-实现思路解析)  
-4. [安全性与优化](#4-安全性与优化)  
-5. [使用指南](#5-使用指南)  
+4. [使用指南](#5-使用指南)  
 
 ---
 
@@ -85,3 +84,29 @@ class PrivacyPreservingServer:
         for h in hashes:
             prefix = h[:k//8]  # 取前k位（k=16 → 取2字节）
             self.prefix_db.setdefault(prefix, []).append(h)
+```
+优化点​​：
+​1. ​分层加密​​：先ECDH密钥交换 → 再用AES-GCM加密前缀
+​2. ​恒定时间验证​​：避免时序泄漏
+```python
+def safe_compare(a: bytes, b: bytes) -> bool:
+    return hmac.compare_digest(a, b)
+```
+### 简化版核心逻辑
+```python
+def check_credentials(u: bytes, v: bytes, filter: Set[bytes]) -> bool:
+    h = sha256(u).digest()
+    h_xor = bytes([a ^ b for a, b in zip(h, v)])
+    return h_xor in filter  # 布隆过滤器查询
+```
+​​设计取舍​​：
+
+牺牲隐私性换取实现简单
+假设服务端完全可信
+## 5. 使用指南
+
+#### 命令行执行
+```bash
+python full_protocol.py
+python  simplified.py
+```
