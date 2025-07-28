@@ -122,3 +122,13 @@ P1对P2的数据计算(H(w)ᵏ²)ᵏ¹ = H(w)ᵏ¹ᵏ²
 ### 3. ​抵抗攻击​​：
 抵抗被动攻击：得益于DDH假设
 抵抗主动攻击：需要额外的认证机制
+## 实验结果
+示例输入：
+``` python
+V = ["password1", "password2", "user123"]
+W = [("password1", 100), ("password3", 50), ("user123", 200)]
+```
+输出：
+``` python
+Intersection sum: 300
+```
