@@ -85,7 +85,7 @@ if __name__ == "__main__":
     
     # 检查是否泄露
     is_leaked = server.check_password(u, v)
-    print(f"密码泄露状态: {'⚠️ 存在泄露风险' if is_leaked else '✅ 安全'}")
+    print(f"密码泄露状态: {'⚠️ 存在泄露风险' if is_leaked else '安全'}")
     
     # 测试已知泄露案例
     test_client = PasswordCheckupClient("leaked_user", "password123")
