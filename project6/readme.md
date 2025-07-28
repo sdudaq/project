@@ -21,25 +21,25 @@ P2：集合 W = {(w₁, t₁), (w₂, t₂), ..., (wₘ₂, tₘ₂)}，其中 w
 #### 哈希到群​​：
 ``` math
 H:&nbspU&nbsp→&nbspG
-h = H(v) = SHA256(v) mod p
+h&nbsp=&nbspH(v)&nbsp=&nbspSHA256(v)&nbspmod&nbspp
 ```
 将任意标识符映射到群G中的随机元素
 #### 双盲化过程：
 ​​
 ``` math
-P1计算: H(v)ᵏ¹ mod p
-P2计算: (H(v)ᵏ¹)ᵏ² = H(v)ᵏ¹ᵏ² mod p
+P1计算: H(v)ᵏ¹&nbspmod&nbspp
+P2计算: (H(v)ᵏ¹)ᵏ²&nbsp=&nbspH(v)ᵏ¹ᵏ²&nbspmod&nbspp
 ```
 通过双方私钥k₁,k₂实现双重盲化
 #### 交集判断：
 ​``` math
-J = {j | H(wⱼ)ᵏ¹ᵏ² ∈ Z}
+J&nbsp=&nbsp{j&nbsp|&nbspH(wⱼ)ᵏ¹ᵏ²&nbsp∈&nbspZ}
 
 其中Z是P2返回的盲化集合
 ​​```
 #### 同态求和：
 ``` math
-Sⱼ = Σ tⱼ (对j ∈ J)
+Sⱼ&nbsp=&nbspΣ&nbsptⱼ&nbsp(对j&nbsp∈&nbspJ)
 
 ```
 
