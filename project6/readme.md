@@ -20,26 +20,26 @@ P2：集合 W = {(w₁, t₁), (w₂, t₂), ..., (wₘ₂, tₘ₂)}，其中 w
 ### 2.3 数学公式解释
 #### 哈希到群​​：
 ``` math
-H:U → G
-h = H(v) = SHA256(v) mod p
+H:&nbsp;U&nbsp;→&nbsp;G
+h&nbsp;=&nbsp;H(v)&nbsp;=&nbsp;SHA256(v)&nbsp;mod&nbsp;p
 ```
 将任意标识符映射到群G中的随机元素
 #### 双盲化过程：
 ​​
 ``` math
-P1计算: H(v)ᵏ¹ mod p
-P2计算: (H(v)ᵏ¹)ᵏ² = H(v)ᵏ¹ᵏ² mod p
+P1计算: H(v)ᵏ¹&nbsp;mod&nbsp;p
+P2计算: (H(v)ᵏ¹)ᵏ²&nbsp;=&nbsp;H(v)ᵏ¹ᵏ²&nbsp;mod&nbsp;p
 ```
 通过双方私钥k₁,k₂实现双重盲化
 #### 交集判断：
 ​``` math
-J = {j | H(wⱼ)ᵏ¹ᵏ² ∈ Z}
+J&nbsp;=&nbsp;{j&nbsp;|&nbsp;H(wⱼ)ᵏ¹ᵏ²&nbsp;∈&nbsp;Z}
 
 其中Z是P2返回的盲化集合
 ​​```
 #### 同态求和：
 ``` math
-Sⱼ = Σ tⱼ (对j ∈ J)
+Sⱼ&nbsp;=&nbsp;Σ&nbsp;tⱼ&nbsp;(对j&nbsp;∈&nbsp;J)
 
 ```
 
